@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sleep.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfedoren <tfedoren@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 19:04:08 by tfedoren          #+#    #+#             */
-/*   Updated: 2022/10/10 19:36:19 by tfedoren         ###   ########.fr       */
+/*   Created: 2022/10/10 14:26:03 by tfedoren          #+#    #+#             */
+/*   Updated: 2022/10/10 14:26:31 by tfedoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
-#include <stdio.h>
-// #include <sys/time.h>
 
-void *start_routine(void *smth)
+void	philo_sleep(time_t sleep_time)
 {
-	
-}
+	time_t	wake_up;
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-	// (void)argc;
-	// (void)argv;
-	check_input(argc, argv);
-	init(data, argc, argv);
-	int i;
-
-	i = 0;
-	while(i < data->number_of_philosophers)
+	wake_up = get_time_in_ms() + sleep_time;
+	while (get_time_in_ms() < wake_up)
 	{
-		pthread_create(&data->philosopher[i].thread_id, NULL,  start_routine, &data->philosopher[i]);
-		i++;
+		if (has_simulation_stopped())
+			break ;
+		usleep(100);
 	}
-
-
-
-	
-	return (0);
 }

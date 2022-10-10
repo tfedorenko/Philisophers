@@ -6,7 +6,7 @@
 /*   By: tfedoren <tfedoren@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 20:11:31 by tfedoren          #+#    #+#             */
-/*   Updated: 2022/10/09 18:49:29 by tfedoren         ###   ########.fr       */
+/*   Updated: 2022/10/10 19:32:21 by tfedoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,35 @@ typedef struct s_counter
 	unsigned int count;
 } t_counter;
 
+typedef struct s_philosopher
+{
+	int philosopher_number;
+	unsigned int number_times_has_eaten;
+	unsigned int time_last_meal;
+	int fork_right;
+	int fork_left;
+	unsigned int time_to_think;
+	pthread_t thread_id;
+	
+} t_philosopher;
+
+typedef struct s_data
+{
+	int number_of_philosophers;
+	int time_to_eat;
+	int time_to_sleep;
+	int time_to_die;
+	int number_of_times_each_philosopher_must_eat;
+	unsigned int start_time;
+	
+	pthread_mutex_t *forks;
+	t_philosopher *philosopher;
+} t_data;
+
+
 int	ft_atoi(const char *str);
 int	ft_isdigit(int c);
+void	*ft_calloc(size_t num, size_t size);
+
+time_t	get_time_in_ms(void);
+void	init(t_data *data, int argc, char **argv);

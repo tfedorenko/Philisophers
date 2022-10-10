@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stop_simulation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfedoren <tfedoren@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 19:04:08 by tfedoren          #+#    #+#             */
-/*   Updated: 2022/10/10 19:36:19 by tfedoren         ###   ########.fr       */
+/*   Created: 2022/10/10 14:27:09 by tfedoren          #+#    #+#             */
+/*   Updated: 2022/10/10 14:28:18 by tfedoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <unistd.h>
-#include <stdio.h>
-// #include <sys/time.h>
 
-void *start_routine(void *smth)
+int	has_simulation_stopped(t_data *data)
 {
-	
-}
+	int	flag;
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-	// (void)argc;
-	// (void)argv;
-	check_input(argc, argv);
-	init(data, argc, argv);
-	int i;
-
-	i = 0;
-	while(i < data->number_of_philosophers)
+	flag = 0;
+	if (someone_died())
+		flag = 1;
+	else if (data->number_of_times_each_philosopher_must_eat)
 	{
-		pthread_create(&data->philosopher[i].thread_id, NULL,  start_routine, &data->philosopher[i]);
-		i++;
+		if (number_have_eaten() == data->number_of_times_each_philosopher_must_eat)
+			flag = 1;
 	}
-
-
-
-	
-	return (0);
+	return (flag);
 }

@@ -6,9 +6,11 @@
 /*   By: tfedoren <tfedoren@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 20:09:55 by tfedoren          #+#    #+#             */
-/*   Updated: 2022/10/08 20:10:29 by tfedoren         ###   ########.fr       */
+/*   Updated: 2022/10/10 16:05:08 by tfedoren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 int	ft_atoi(const char *str)
 {
@@ -39,4 +41,15 @@ int	ft_atoi(const char *str)
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	char	*m;
+
+	m = malloc(size * num);
+	if (!m)
+		return (NULL);
+	ft_memset(m, 0, size * num);
+	return (m);
 }
